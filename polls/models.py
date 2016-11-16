@@ -17,6 +17,8 @@ class Question(models.Model):
         return self.question_text
 
     def was_published_recently(self):
+        if self.pub_date > timezone.now():
+            return False
         return self.pub_date + datetime.timedelta(days=1) >= timezone.now()
 
 
